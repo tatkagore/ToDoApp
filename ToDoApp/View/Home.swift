@@ -24,7 +24,7 @@ struct Home: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack{
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Welcome back, \(loginUsernameKey) 👋🏻!")
+                    Text("Hello, \(loginUsernameKey) 👋🏻!")
                         .font(.title.bold())
                         .padding(.bottom,15)
                     Text("Here's your to do list:")
