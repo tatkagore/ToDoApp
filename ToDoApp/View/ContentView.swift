@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("loginUsernameKey") var loginUsernameKey = ""
+    @AppStorage("isLoggedIn") var isLoggedIn = false
+
     var body: some View {
         NavigationView {
-            Home()
-                .navigationBarTitle("Tick Tack")
-                .navigationBarTitleDisplayMode(.inline)
+            if isLoggedIn {
+                Home()
+                    .navigationBarTitle("Tick-Tack")
+                    .navigationBarTitleDisplayMode(.inline)
+            } else {
+                GetUsernameView()
+            }
         }
     }
 }

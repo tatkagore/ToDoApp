@@ -13,7 +13,7 @@ struct ToDoAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashScreen()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

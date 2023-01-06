@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct Home: View {
+    @AppStorage("loginUsernameKey") var loginUsernameKey = ""
+    
     @StateObject var taskModel: TaskViewModel = .init()
     @Environment(\.self) var env
 
@@ -22,19 +24,24 @@ struct Home: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack{
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Welcome back")
-                        .font(.callout)
-                    Text("Here's Update Today")
+                    Text("Welcome back, \(loginUsernameKey) 👋🏻!")
                         .font(.title.bold())
+                        .padding(.bottom,15)
+                    Text("Here's your to do list:")
+                        .font(.headline)
+                    Divider()
+                        .frame(minHeight: 3)
+                        .overlay(Color("Lavender"))
                     CustomSegmentedBar()
                         .padding(.top, 5)
+                    
                     //MARK: Task view
                     TaskView()
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical)
             }
-            .padding( )
+            .padding()
         }
         .overlay(alignment: .bottom) {
             // MARK: Add button
@@ -54,12 +61,16 @@ struct Home: View {
                 .foregroundColor(.white)
                 .padding(.vertical, 12)
                 .padding(.horizontal)
-                .background(.black, in: Capsule())
+                .background(Color("Lavender"), in: Capsule())
             }
             .sheet(isPresented: $isShowingSheet) {
                 
                 AddNewTask()
                     .environmentObject(taskModel)
+            }
+            .onAppear{
+                taskModel.editTask = nil
+                taskModel.requestAuthorization()
             }
             // MARK: Linear Gradient BG
             .padding(.top, 10)

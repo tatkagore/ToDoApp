@@ -150,13 +150,27 @@ struct AddNewTask: View {
             
             //MARK: Save Button
             Button {
-                //MARK: If success Clothing View
-                print(0)
+                
+                let dateComponents = Calendar.current.dateComponents([.day,.hour, .minute], from: taskModel.taskDeadline)
+                guard let hour = dateComponents.hour, let minute = dateComponents.minute, let day = dateComponents.day else { return }
+                taskModel.createLocalNotification(title: taskModel.taskTitle,day: day, hour: hour, minute: minute) { error in
+                    print(minute)
+                    if error != nil {
+                        print("error notific")
+                    }
+                }
+                
                 if taskModel.addTask(context: env.managedObjectContext){
-                    print(1)
+                    
                     env.dismiss()
                 }
-                print(2)
+                //MARK: If success Clothing View
+//                print(0)
+//                if taskModel.addTask(context: env.managedObjectContext){
+//                    print(1)
+//                    env.dismiss()
+//                }
+//                print(2)
                 
             } label: {
                 Text("Save Task")
