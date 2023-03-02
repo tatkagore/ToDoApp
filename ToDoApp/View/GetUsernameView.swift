@@ -25,7 +25,7 @@ struct GetUsernameView: View {
                    .foregroundColor(.white)
                 VStack {
                     Text("Welcome!")
-                        .foregroundColor(Color.black)
+                        .foregroundColor(Color.primary)
                         .font(.largeTitle)
                         .bold()
                         .padding(10)
@@ -34,7 +34,7 @@ struct GetUsernameView: View {
                         .frame(width: 300, height: 50)
                         .background(Color(.black).opacity(0.05))
                         .cornerRadius(15)
-                        .overlay(RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 1).foregroundColor(Color.black.opacity(0.3)))
+                        .overlay(RoundedRectangle(cornerRadius: 15).stroke(lineWidth: 1).foregroundColor(Color.primary.opacity(0.3)))
                         .padding(10)
                     Button {
                         isLoggedIn = true

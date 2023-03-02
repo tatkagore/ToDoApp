@@ -15,6 +15,8 @@ struct ToDoAppApp: App {
         WindowGroup {
             SplashScreen()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.colorScheme, .light)
+
         }
     }
 }

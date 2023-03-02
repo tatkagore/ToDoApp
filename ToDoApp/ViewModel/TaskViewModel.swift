@@ -104,7 +104,6 @@ class TaskViewModel: ObservableObject {
         dateComponents.day = day
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = "Tick-Tack"
         notificationContent.sound = .default

@@ -25,7 +25,7 @@ struct AddNewTask: View {
                     } label: {
                         Image(systemName: "arrow.left")
                             .font(.title3)
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                     }
                 }
                 .overlay(alignment: .trailing) {
@@ -93,7 +93,7 @@ struct AddNewTask: View {
                     taskModel.showDatePicker.toggle()
                 } label: {
                     Image(systemName: "calendar")
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                 }
 
             }
@@ -124,12 +124,12 @@ struct AddNewTask: View {
                             .font(.callout)
                             .padding(.vertical, 8)
                             .frame(maxWidth: .infinity)
-                            .foregroundColor(taskModel.taskType == type ? . white : .black)
+                            .foregroundColor(taskModel.taskType == type ? .white : .primary)
                         
                             .background{
                                 if taskModel.taskType == type {
                                     Capsule()
-                                        .fill(.black)
+                                        .fill(Color("Lavender"))
                                         .matchedGeometryEffect(id: "TYPE", in: animation)
                                 }else {
                                     Capsule()
@@ -181,7 +181,7 @@ struct AddNewTask: View {
                     .foregroundColor(.white)
                     .background{
                         Capsule()
-                            .fill(.black)
+                            .fill(Color("Lavender"))
                         
                     }
             }
@@ -221,5 +221,7 @@ struct AddNewTask_Previews: PreviewProvider {
     static var previews: some View {
         AddNewTask()
             .environmentObject(TaskViewModel())
+        //.preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
     }
 }

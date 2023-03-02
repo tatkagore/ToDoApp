@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct Home: View {
-    @AppStorage("loginUsernameKey") var loginUsernameKey = ""
     
+    @AppStorage("loginUsernameKey") var loginUsernameKey = ""
     @StateObject var taskModel: TaskViewModel = .init()
     @Environment(\.self) var env
-
+    
     @State var isShowingSheet = false
     //MARK: Matched Geometry Namespace
     @Namespace var animation
@@ -48,7 +48,7 @@ struct Home: View {
             Button{
                 taskModel.resetTaskData()
                 isShowingSheet = true
-//                taskModel.openEditTask.toggle()
+                //                taskModel.openEditTask.toggle()
             } label: {
                 Label {
                     Text("Add Task")
@@ -85,17 +85,17 @@ struct Home: View {
                 .ignoresSafeArea()
             }
         }
-//        .fullScreenCover(isPresented: $isShowingSheet) {
-//            print(3)
-////            DispatchQueue.main.async{
-//                print(4)
-//                taskModel.resetTaskData()
-//                print(5)
-////            }
-//        } content: {
-//            AddNewTask()
-//                .environmentObject(taskModel)
-//        }
+        //        .fullScreenCover(isPresented: $isShowingSheet) {
+        //            print(3)
+        ////            DispatchQueue.main.async{
+        //                print(4)
+        //                taskModel.resetTaskData()
+        //                print(5)
+        ////            }
+        //        } content: {
+        //            AddNewTask()
+        //                .environmentObject(taskModel)
+        //        }
     }
     
     
@@ -146,8 +146,8 @@ struct Home: View {
                         taskModel.openEditTask = true
                         if taskModel.openEditTask{
                             taskModel.editTask = task
-
-
+                            
+                            
                             taskModel.setupTask()
                             isShowingSheet = true
                         }
@@ -156,26 +156,26 @@ struct Home: View {
                     Button("Cancel", action: {})
                 } label: {
                     Image(systemName: "ellipsis.circle")
-
+                    
                         .font(.system(size: 26.0, weight: .light))
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                 }
                 
-//                MARK: Edit Button Only for Non Completed Tasks
+                //                MARK: Edit Button Only for Non Completed Tasks
                 
-//                    Button{
-//                        taskModel.editTask = task
-//                        isShowingSheet = true
-//                        taskModel.setupTask()
-//                    } label: {
-//                        Image(systemName: "square.and.pencil")
-//                            .foregroundColor(.black)
-//                    }
+                //                    Button{
+                //                        taskModel.editTask = task
+                //                        isShowingSheet = true
+                //                        taskModel.setupTask()
+                //                    } label: {
+                //                        Image(systemName: "square.and.pencil")
+                //                            .foregroundColor(.black)
+                //                    }
                 
             }
             Text(task.title ?? "")
                 .font(.title3)
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
                 .padding(.vertical, 10)
             HStack(alignment:.bottom,spacing: 0){
                 VStack(alignment:.leading,spacing: 10){
@@ -190,6 +190,12 @@ struct Home: View {
                     } icon: {
                         Image(systemName: "clock")
                     }.font(.caption)
+                
+                    ShareLink(item: taskModel.taskTitle, subject: Text("Check out this link"), message: Text("Here is the task for today")) {
+                        Label("Share Task", systemImage:  "square.and.arrow.up")
+                    }
+                    .font(.callout)
+                    .foregroundColor(.primary)
                 }
                 .frame(maxWidth:.infinity,alignment: .leading)
                 
@@ -200,7 +206,7 @@ struct Home: View {
                         try? env.managedObjectContext.save()
                     }label: {
                         Circle()
-                            .strokeBorder(.black,lineWidth: 1.5)
+                            .strokeBorder(.primary,lineWidth: 1.5)
                             .frame(width:25, height:25)
                             .contentShape(Circle())
                     }
@@ -225,13 +231,13 @@ struct Home: View {
                     .font(.callout)
                     .fontWeight(.semibold)
                     .scaleEffect(0.9)
-                    .foregroundColor(taskModel.currentTab == tab ? .white : .black)
+                    .foregroundColor(taskModel.currentTab == tab ? .white : .primary)
                     .padding(.vertical, 6)
                     .frame(maxWidth: .infinity)
                     .background{
                         if taskModel.currentTab == tab{
                             Capsule()
-                                .fill(.black)
+                                .fill(Color("Lavender"))
                                 .matchedGeometryEffect(id: "TAB", in: animation)
                         }
                     }
@@ -247,5 +253,9 @@ struct Home: View {
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.light)
+        ContentView()
+            .preferredColorScheme(.dark)
+        
     }
 }
